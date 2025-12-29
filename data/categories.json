@@ -1,0 +1,32 @@
+{
+  "ring": {
+    "vi": "Nhẫn",
+    "en": "Ring",
+    "keywords": ["nhẫn", "ring", "nhẫn cưới", "nhẫn kim cương", "nhẫn vàng"],
+    "visual_style": "macro shot, sparkle, elegant"
+  },
+  "necklace": {
+    "vi": "Dây chuyền",
+    "en": "Necklace", 
+    "keywords": ["dây chuyền", "necklace", "vòng cổ", "pendant"],
+    "visual_style": "elegant drape, skin glow, sophisticated"
+  },
+  "bracelet": {
+    "vi": "Vòng tay",
+    "en": "Bracelet",
+    "keywords": ["vòng tay", "bracelet", "lắc tay", "bangle"],
+    "visual_style": "wrist movement, casual elegance, lifestyle"
+  },
+  "earring": {
+    "vi": "Bông tai",
+    "en": "Earring",
+    "keywords": ["bông tai", "earring", "hoa tai", "khuyên tai"],
+    "visual_style": "face frame, swing motion, glamour"
+  },
+  "watch": {
+    "vi": "Đồng hồ",
+    "en": "Watch",
+    "keywords": ["đồng hồ", "watch", "luxury watch"],
+    "visual_style": "precision, luxury, time-lapse"
+  }
+}

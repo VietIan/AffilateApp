@@ -1,0 +1,17 @@
+# === Core ===
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+Pillow>=10.0.0
+
+# === AI (Gemini 2.5) ===
+google-generativeai>=0.8.0
+
+# === Firebase ===
+pyrebase4>=4.7.1
+requests>=2.31.0
+
+# === TikTok Scraper ===
+playwright>=1.40.0
+
+# === Utils ===
+pyperclip>=1.8.2

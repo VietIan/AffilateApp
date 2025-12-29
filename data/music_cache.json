@@ -1,0 +1,81 @@
+[
+  {
+    "id": "song_001",
+    "name": "APT",
+    "artist": "ROSÉ & Bruno Mars",
+    "vibe": [
+      "Sang chảnh",
+      "Quốc tế",
+      "Trendy",
+      "Sôi động"
+    ],
+    "suitable_for": [
+      "Luxury",
+      "Kim cương",
+      "Nhẫn cưới"
+    ]
+  },
+  {
+    "id": "song_002",
+    "name": "Die With A Smile",
+    "artist": "Lady Gaga & Bruno Mars",
+    "vibe": [
+      "Lãng mạn",
+      "Ballad",
+      "Cảm xúc",
+      "Sang trọng"
+    ],
+    "suitable_for": [
+      "Nhẫn cưới",
+      "Dây chuyền vàng",
+      "Quà tặng"
+    ]
+  },
+  {
+    "id": "song_003",
+    "name": "Cắt Đôi Nỗi Sầu",
+    "artist": "Tăng Duy Tân",
+    "vibe": [
+      "Sôi động",
+      "Remix",
+      "Nhảy",
+      "Vui"
+    ],
+    "suitable_for": [
+      "Vòng tay",
+      "Teen",
+      "Màu sắc"
+    ]
+  },
+  {
+    "id": "song_004",
+    "name": "Hót Hòn Họt",
+    "artist": "Phạm Thảo Nhi",
+    "vibe": [
+      "Biến hình",
+      "Trendy",
+      "Thời trang"
+    ],
+    "suitable_for": [
+      "Outfit",
+      "Phụ kiện",
+      "Bông tai"
+    ]
+  },
+  {
+    "id": "song_005",
+    "name": "Nhạc Piano Nhẹ Nhàng",
+    "artist": "Instrumental",
+    "vibe": [
+      "Sang trọng",
+      "Nhẹ nhàng",
+      "Cao cấp",
+      "Yên bình"
+    ],
+    "suitable_for": [
+      "Luxury",
+      "Kim cương",
+      "Vàng cao cấp"
+    ]
+  }
+]
