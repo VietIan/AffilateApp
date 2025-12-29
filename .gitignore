@@ -69,6 +69,14 @@ node_modules/
 # dataconnect generated files
 .dataconnect
 
+# Google Cloud Service Account JSON
+*.json
+!package.json
+!package-lock.json
+!database.rules.json
+!firebase.json
+!data/*.json
+
 # Python
 __pycache__/
 *.py[cod]
@@ -86,3 +94,7 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Output videos
+outputs/*.mp4
+outputs/*.mov

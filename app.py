@@ -46,6 +46,14 @@ except Exception as e:
     print(f"Scraper not available: {e}")
     SCRAPER_AVAILABLE = False
 
+# Thử import Video Generator
+try:
+    from core.video_generator import VideoGenerator
+    VIDEO_AVAILABLE = True
+except Exception as e:
+    print(f"Video Generator not available: {e}")
+    VIDEO_AVAILABLE = False
+
 
 # ===== PAGE CONFIG =====
 st.set_page_config(
@@ -68,6 +76,10 @@ if "music_list" not in st.session_state:
     st.session_state["music_list"] = None
 if "history" not in st.session_state:
     st.session_state["history"] = []
+if "video_path" not in st.session_state:
+    st.session_state["video_path"] = None
+if "video_generating" not in st.session_state:
+    st.session_state["video_generating"] = False
 
 
 # ===== FUNCTIONS =====
@@ -83,6 +95,17 @@ def get_firebase():
     if FIREBASE_AVAILABLE:
         try:
             return FirebaseDB()
+        except:
+            return None
+    return None
+
+
+@st.cache_resource
+def get_video_generator():
+    """Cache Video Generator"""
+    if VIDEO_AVAILABLE:
+        try:
+            return VideoGenerator()
         except:
             return None
     return None
@@ -164,6 +187,12 @@ with st.sidebar:
         st.success("✅ Firebase: Connected")
     else:
         st.warning("⚠️ Firebase: Not configured")
+    
+    # Veo 3.0 status
+    if VIDEO_AVAILABLE:
+        st.success("✅ Veo 3.0: Ready")
+    else:
+        st.warning("⚠️ Veo 3.0: Not configured")
     
     st.divider()
     
@@ -272,11 +301,62 @@ with col_left:
 # ===== RIGHT COLUMN: RESULTS =====
 with col_right:
     st.subheader("📤 Kết Quả")
-    st.caption("💡 Copy prompt bên dưới → Paste vào Veo3 để tạo video")
     
     # Hiển thị kết quả
     if st.session_state.get("result"):
-        render_result_display(st.session_state["result"])
+        result = st.session_state["result"]
+        render_result_display(result)
+        
+        st.divider()
+        
+        # ===== VIDEO GENERATION SECTION =====
+        st.subheader("🎬 Tạo Video Thật")
+        
+        if VIDEO_AVAILABLE:
+            col_v1, col_v2 = st.columns(2)
+            with col_v1:
+                video_duration = st.selectbox("Thời lượng", [5, 8, 10], index=0)
+            with col_v2:
+                video_ratio = st.selectbox("Tỷ lệ", ["9:16 (TikTok)", "16:9 (YouTube)", "1:1 (Instagram)"], index=0)
+            
+            ratio_map = {"9:16 (TikTok)": "9:16", "16:9 (YouTube)": "16:9", "1:1 (Instagram)": "1:1"}
+            
+            if st.button("🎬 TẠO VIDEO VỚI VEO 3.0", type="primary", use_container_width=True):
+                visual_prompt = result.get("visual_prompt", "")
+                if visual_prompt:
+                    with st.spinner("🎬 Đang tạo video với Veo 3.0... (có thể mất 2-5 phút)"):
+                        video_gen = get_video_generator()
+                        success, message, video_path = video_gen.generate_video(
+                            prompt=visual_prompt,
+                            aspect_ratio=ratio_map[video_ratio],
+                            duration_seconds=video_duration
+                        )
+                        
+                        if success and video_path:
+                            st.session_state["video_path"] = video_path
+                            st.success(f"✅ {message}")
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {message}")
+                else:
+                    st.warning("Chưa có Visual Prompt. Hãy Generate Content trước.")
+            
+            # Hiển thị video đã tạo
+            if st.session_state.get("video_path"):
+                video_path = st.session_state["video_path"]
+                if os.path.exists(video_path):
+                    st.video(video_path)
+                    with open(video_path, "rb") as f:
+                        st.download_button(
+                            "📥 Tải Video",
+                            data=f.read(),
+                            file_name=os.path.basename(video_path),
+                            mime="video/mp4",
+                            use_container_width=True
+                        )
+        else:
+            st.info("💡 Cấu hình VERTEX_API_KEY trong .env để tạo video thật")
+            st.caption("Hiện tại: Copy Visual Prompt → Paste vào Veo3 web")
     else:
         st.info("👆 Upload ảnh và nhấn Generate để bắt đầu")
 
